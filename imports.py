@@ -53,17 +53,8 @@ from mpl_toolkits.mplot3d import Axes3D
 # seaborn
 import seaborn as sns
 
-# binance modules
-import websocket, talib
-from binance.client import Client
-from binance.enums import *
-
-# facebook "prophet"
-from prophet import Prophet
-
 # beautifulsoup
 from bs4 import BeautifulSoup
-
 #natural language toolkit
 import nltk
 from nltk.tokenize.toktok import ToktokTokenizer
