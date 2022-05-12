@@ -108,15 +108,14 @@ def prep_article_data(df, column, extra_words=[], exclude_words=[]):
     
     return df[['repo','language', column,'clean', 'stemmed', 'lemmatized']]
 
-def words():
+def words(df):
     '''
     !!!  please run `python aquire.py` in terminal prior to utilizing 'prepare.py' !!!
-
+    ---
     this function returns 'readme's' for the first 100 repos returned by the search term "bitcoin" on github. 
     the results include 'repo', 'language', and 'readme'.
     'readme' is a string which is cleaned, trimmed, and lemmetized for exploration and modeling.
     '''
-    df=pd.read_json('/Users/hinzlehome/codeup-data-science/Garcia-Hensley-Nichols-NLP-project/data.json')
     # rename columns
     df=df.rename(columns={'readme_contents':'readme'})
     # clean readme contents and return cleaned, trimmed, and lemmetized versions
