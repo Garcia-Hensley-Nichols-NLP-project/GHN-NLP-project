@@ -6,16 +6,21 @@ ___
 
 ## Table of Contents
 
-1. [Project Summary](#project-summary)
-2. [Project Planning](#project-planning)
-3. [Data Dictionary](#data-dictionary)
-4. [Outline of Project Plan](#outline-of-project-plan)
-    1. [Data Acquisition](#data-acquisition)
-    2. [Data Preparation](#data-preparation)
-    3. [Exploratory Analysis](#exploratory-analysis)
-    4. [Modeling](#modeling)
-5. [Conclusion](#conclusion)
-6. [Recreate This Project](#instructions-for-recreating-this-project)
+- [NLP Project](#nlp-project)
+  - [Table of Contents](#table-of-contents)
+  - [Project Summary](#project-summary)
+  - [Project Planning](#project-planning)
+    - [Project Goals](#project-goals)
+    - [Project Description](#project-description)
+    - [Initial Questions](#initial-questions)
+  - [Data Dictionary](#data-dictionary)
+  - [Outline of Project Plan](#outline-of-project-plan)
+    - [Data Acquisition](#data-acquisition)
+    - [Data Preparation](#data-preparation)
+    - [Exploratory Analysis](#exploratory-analysis)
+    - [Modeling](#modeling)
+  - [Conclusion](#conclusion)
+  - [Instructions For Recreating This Project](#instructions-for-recreating-this-project)
 
 ___
 
@@ -52,7 +57,9 @@ ___
 
 | Variable              | Meaning      |
 | --------------------- | ------------ |
-
+| repo | Path to repository on github.com |
+| language | Primary programming language in repository |
+| readme_contents | Contains full contents of the repostitories "README.md" |
 
 </details>
 
@@ -70,10 +77,13 @@ Plan &#8594; Acquire &#8594; Prepare &#8594; Explore &#8594; Model &#8594; Deliv
 <details><summary><i>Click to expand</i></summary>
 
 **Acquisition Files:**
-
+- test.ipynb, pulls list of repositories matching search term "binance:
+- acquire.py, pulls repo path, language, and readme from list of repo's in test.ipynb
 
 **Steps Taken:**
-
+- The data is collected from several repositories on github.com via the sites API.
+- A list of repo's is generated from search results for "bitcoin".
+- The readme's from each repo are pulled through the API and compiled to return a .json file with the aforementioned keys and values.
 
 </details>
 
@@ -82,10 +92,21 @@ Plan &#8594; Acquire &#8594; Prepare &#8594; Explore &#8594; Model &#8594; Deliv
 <details><summary><i>Click to expand</i></summary>
 
 **Preparation Files:**
-
+prepare.ipynb, testing of prepare.py
+prepare.py, prepares the readme's for exploration and modeling
 
 **Steps Taken:**
+All data is prepared for natural language processing by:
 
+- lowering the case of all words
+- removing punctuation
+- tokenization
+- removing stop words
+
+Additional preparations include:
+
+- stemming
+- lemmatization
 
 </details>
 
@@ -94,10 +115,13 @@ Plan &#8594; Acquire &#8594; Prepare &#8594; Explore &#8594; Model &#8594; Deliv
 <details><summary><i>Click to expand</i></summary>
 
 **Exploratory Analysis Files:**
-
+explore.ipynb,
 
 **Steps Taken:**
-
+- explore readme's by language
+- analyze word frequency by language
+- bi-gram analysis
+- 
 
 </details>
 
@@ -129,6 +153,10 @@ ___
 
 <details><summary><i>Click to expand</i></summary>
 
+Clone this repository into your local machine using the following command:
+git clone git@github.com:Garcia-Hensley-Nichols-NLP-project/GHN-NLP-project.git
+You will need Natural Language Tool Kit (NLKT), Pandas, Numpy, Matplotlib, Seaborn, and SKLearn installed on your machine.
+Please run `python acquire.py` in a terminal to acquire the 'data.json' file. Now you can start a Jupyter Notebook session and execute the code blocks in the final_report.ipynb notebook.
 
 
 </details>
