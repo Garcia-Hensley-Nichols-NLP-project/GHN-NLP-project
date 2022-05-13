@@ -26,7 +26,7 @@ ___
 
 ## Project Summary
 
-
+Data from the `README.md` files of 100 GitHub repositories (repo's) are analyzed in order to attempt prediction of the primary programming language.
 
 ___
 
@@ -36,7 +36,7 @@ ___
 
 ### Project Goals
 
-
+Determine the primary programming language of a GitHub repository by using natural language processing techniques on the `README.md`.
 
 ### Project Description
 
@@ -44,7 +44,8 @@ ___
 
 ### Initial Questions
 
-
+1. Can we predict the programming language of a repo by using NLP on the `README.md`?
+2. Is there a statistically significant difference between `README.md` lengths from the top 3 most common languages?
 
 </details>
 
@@ -68,7 +69,7 @@ ___
 ## Outline of Project Plan
 
 The following outlines the process taken through the Data Science Pipeline to complete this project.
-<br>
+
 Plan &#8594; Acquire &#8594; Prepare &#8594; Explore &#8594; Model &#8594; Deliver
 
 ---
@@ -77,10 +78,12 @@ Plan &#8594; Acquire &#8594; Prepare &#8594; Explore &#8594; Model &#8594; Deliv
 <details><summary><i>Click to expand</i></summary>
 
 **Acquisition Files:**
+
 - test.ipynb, pulls list of repositories matching search term "binance:
 - acquire.py, pulls repo path, language, and readme from list of repo's in test.ipynb
 
 **Steps Taken:**
+
 - The data is collected from several repositories on github.com via the sites API.
 - A list of repo's is generated from search results for "bitcoin".
 - The readme's from each repo are pulled through the API and compiled to return a .json file with the aforementioned keys and values.
@@ -92,10 +95,12 @@ Plan &#8594; Acquire &#8594; Prepare &#8594; Explore &#8594; Model &#8594; Deliv
 <details><summary><i>Click to expand</i></summary>
 
 **Preparation Files:**
-prepare.ipynb, testing of prepare.py
-prepare.py, prepares the readme's for exploration and modeling
+
+- prepare.ipynb, testing of prepare.py
+- prepare.py, prepares the readme's for exploration and modeling
 
 **Steps Taken:**
+
 All data is prepared for natural language processing by:
 
 - lowering the case of all words
@@ -115,14 +120,17 @@ Additional preparations include:
 <details><summary><i>Click to expand</i></summary>
 
 **Exploratory Analysis Files:**
-explore.ipynb,
+
+- explore.ipynb,
+- prepare.py
+- preprocessing.py
 
 **Steps Taken:**
 
 - explore readme's by language
 - analyze word frequency by language
 - bi-gram analysis
-- 
+- word cloud
 
 </details>
 
@@ -132,8 +140,8 @@ explore.ipynb,
 
 **Modeling Files:**
 
-model.ipynb
-model.py
+- Nichols_work.ipynb
+- model.py
 
 **Steps Taken:**
 
@@ -162,10 +170,11 @@ ___
 
 <details><summary><i>Click to expand</i></summary>
 
-Clone this repository into your local machine using the following command:
+1. Clone this repository into your local machine using the following command:
 git clone git@github.com:Garcia-Hensley-Nichols-NLP-project/GHN-NLP-project.git
-You will need Natural Language Tool Kit (NLKT), Pandas, Numpy, Matplotlib, Seaborn, and SKLearn installed on your machine.
-Please run `python acquire.py` in a terminal to acquire the `data.json` file. Now you can start a Jupyter Notebook session and execute the code blocks in the `final_report.ipynb` notebook.
+2. You will need Natural Language Tool Kit (NLKT), Pandas, Numpy, Matplotlib, Seaborn, and SKLearn installed on your machine.
+3. Please run `python acquire.py` in a terminal to acquire the `data.json` file.
+4. Now you can start a Jupyter Notebook session and execute the code blocks in the `final_report.ipynb` notebook.
 
 </details>
 
