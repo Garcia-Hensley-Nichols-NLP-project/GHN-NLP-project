@@ -109,7 +109,7 @@ REPOS = [
     "aceat64/EasyBitcoin-PHP",
     "eveybcd/BitcoinDiamond",
     "siminchen/bitcoinIDE",
-    "ccxt/ccxt",
+    "BitcoinMafia/SpareCoinsExt",
     "thallium205/BitcoinVisualizer",
     "brandonrobertz/BitcoinTradingAlgorithmToolkit",
     "libbitcoin/libbitcoin-explorer",
