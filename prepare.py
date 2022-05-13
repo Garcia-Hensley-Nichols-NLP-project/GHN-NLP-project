@@ -108,6 +108,24 @@ def prep_article_data(df, column, extra_words=[], exclude_words=[]):
     
     return df[['repo','language', column,'clean', 'stemmed', 'lemmatized']]
 
+def words_explore(df):
+    '''
+    !!!  please run `python aquire.py` in terminal prior to utilizing 'prepare.py' !!!
+    ---
+    this function returns 'readme's' for the first 100 repos returned by the search term "bitcoin" on github. 
+    the results include 'repo', 'language', and 'readme'.
+    'readme' is a string which is cleaned, trimmed, and lemmetized for exploration and modeling.
+    '''
+    # rename columns
+    df=df.rename(columns={'readme_contents':'readme'})
+    # clean readme contents and return cleaned, trimmed, and lemmetized versions
+    df=prep_article_data(df,'readme')
+    # consolidate languages other than the top 3 into 'other'
+    rows=(df.language!='Python')&(df.language!='C++')&(df.language!='JavaScript')
+    df.loc[rows,'language']='other'
+
+    return df
+
 def words(df):
     '''
     !!!  please run `python aquire.py` in terminal prior to utilizing 'prepare.py' !!!
@@ -123,5 +141,9 @@ def words(df):
     # consolidate languages other than the top 3 into 'other'
     rows=(df.language!='Python')&(df.language!='C++')&(df.language!='JavaScript')
     df.loc[rows,'language']='other'
+
+    df['contains_python_keywords'] = df.clean.str.contains(r'(python)|(import)|(pip)|(pddataframe)|(python3)', regex = True).astype(int)
+    df['contains_cpp_keywords'] = df.clean.str.contains(r'(windows)|(linux)|(blackbird)', regex = True).astype(int)
+    df['contains_js_keywords'] = df.clean.str.contains(r'(js)|(docker)|(ccxt)|(npm)', regex = True).astype(int)
 
     return df
