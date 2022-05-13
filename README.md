@@ -26,7 +26,7 @@ ___
 
 ## Project Summary
 
-Data from the `README.md` files of 100 GitHub repositories (repo's) are analyzed in order to attempt prediction of the primary programming language.
+Data from the `README.md` files of 100 GitHub repositories (repo's) are analyzed in order to attempt prediction of their primary programming language.
 
 ___
 
@@ -36,9 +36,19 @@ ___
 
 ### Project Goals
 
-Determine the primary programming language of a GitHub repository by using natural language processing techniques on the `README.md`.
+Determine the primary programming language of a GitHub repository by using natural language processing (NLP) techniques on their `README.md`.
 
 ### Project Description
+
+GitHub is where over 83 million developers shape the future of software, together. This software is hosted on the site in "repositories". Aside from from acting as a home for open source coding, GitHub offers several interesting features in the repo's. One particular feature, that we will be investigating in this project, is the programming language percentage.
+
+The programming language percentage is an infographic on the home page of every repo on GitHub. It indicates the percentage of each programming language in that particular repo. For most repo's there is a clear primary programming language (many have only 1 language).
+
+Another common attribute of GitHub repo's is the `README.md`. The `README.md` is a file that generally contains an introduction to the repo, explains the purpose of the code, and shares instructions for running the code.
+
+In this project, we will attempt to use data from the `README.md` to predict what language that repo is primarilly coded in. We start by searching github.com for repo's related to the search term "bitcoin". This search is done via GitHub's API and a list is extracted that contains the url path to 100 related repos. We use the list to ascertain the contents of the `README.md` from each repo. The path and language of the repo are gathered additionally.
+
+Now begins the challenge of quantizing communications in the english lanuage. NLP attempts to do just that by utilizing cutting edge computational power. Common parsing techniques are used on the original corpus collected from GitHub. In this project, the contents of an individual `README.md` are treated as a document. Each document is changed to all lower case letters, has punctuation removed, is tokenized, and has stop-words removed as a function of basic cleaning. Further preprocessing includes stemming and lemmetization. The tidied strings are returned in a single Pandas dataframe.
 
 
 
@@ -79,12 +89,12 @@ Plan &#8594; Acquire &#8594; Prepare &#8594; Explore &#8594; Model &#8594; Deliv
 
 **Acquisition Files:**
 
-- test.ipynb, pulls list of repositories matching search term "binance:
+- test.ipynb, pulls list of repo's matching search term "binance:
 - acquire.py, pulls repo path, language, and readme from list of repo's in test.ipynb
 
 **Steps Taken:**
 
-- The data is collected from several repositories on github.com via the sites API.
+- The data is collected from several repo's on github.com via the sites API.
 - A list of repo's is generated from search results for "bitcoin".
 - The readme's from each repo are pulled through the API and compiled to return a .json file with the aforementioned keys and values.
 
