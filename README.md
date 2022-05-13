@@ -165,7 +165,8 @@ ___
 Clone this repository into your local machine using the following command:
 git clone git@github.com:Garcia-Hensley-Nichols-NLP-project/GHN-NLP-project.git
 You will need Natural Language Tool Kit (NLKT), Pandas, Numpy, Matplotlib, Seaborn, and SKLearn installed on your machine.
-Please run `python acquire.py` in a terminal to acquire the 'data.json' file. Now you can start a Jupyter Notebook session and execute the code blocks in the final_report.ipynb notebook.
+Please run `python acquire.py` in a terminal to acquire the `data.json` file. Now you can start a Jupyter Notebook session and execute the code blocks in the `final_report.ipynb` notebook.
 
 </details>
+
 [Back to top]()
