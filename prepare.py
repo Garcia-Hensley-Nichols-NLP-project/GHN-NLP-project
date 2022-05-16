@@ -191,3 +191,67 @@ def model_prep(df):
 	y_clean_train,
 	y_clean_validate,
 	y_clean_test)
+
+def classi_bow(X_lem_train,y_lem_train,X_stem_train,y_stem_train,X_clean_train,y_clean_train):
+
+    # Make vectorizer objects for bags of words (clean_df)
+    cv_clean = CountVectorizer()
+    tfidf_clean = TfidfVectorizer()
+
+    #Bags of words
+    cv_clean_bow = cv_clean.fit_transform(X_clean_train[['clean']].clean)
+    tf_clean_bow = tfidf_clean.fit_transform(X_clean_train[['clean']].clean)
+    
+    # Make and fit decision tree object for cv_clean_bow
+    cv_tree1 = DecisionTreeClassifier(max_depth=5)
+    cv_tree1.fit(cv_clean_bow, y_clean_train)
+
+    #Make and fit decision tree object for tf_clean_bow
+    tf_tree1 = DecisionTreeClassifier(max_depth=5)
+    tf_tree1.fit(tf_clean_bow, y_clean_train)
+
+
+    # "Stemmed" models
+    cv_stem = CountVectorizer()
+    tfidf_stem = TfidfVectorizer()
+
+    # Bags
+    cv_stem_bow = cv_stem.fit_transform(X_stem_train[['stemmed']].stemmed)
+    tf_stem_bow = tfidf_stem.fit_transform(X_stem_train[['stemmed']].stemmed)
+
+    # Make and fit decision tree object for cv_stem_bow
+    cv_tree2 = DecisionTreeClassifier(max_depth=5)
+    cv_tree2.fit(cv_stem_bow, y_stem_train)
+
+    # Make and fit decision tree object for tf_stem_bow
+    tf_tree2 = DecisionTreeClassifier(max_depth=5)
+    tf_tree2.fit(tf_stem_bow, y_stem_train)
+
+
+    # "Lemmatized" models
+    cv_lem = CountVectorizer()
+    tfidf_lem = TfidfVectorizer()
+
+    # Bags
+    cv_lem_bow = cv_lem.fit_transform(X_lem_train[['lemmatized']].lemmatized)
+    tf_lem_bow = tfidf_lem.fit_transform(X_lem_train[['lemmatized']].lemmatized)
+
+    # Make and fit decision tree object for cv_lem_bow
+    cv_tree3 = DecisionTreeClassifier(max_depth=5)
+    cv_tree3.fit(cv_lem_bow, y_lem_train)
+
+    #Make and fit decision tree object for tf_lem_bow
+    tf_tree3 = DecisionTreeClassifier(max_depth=5)
+    tf_tree3.fit(tf_lem_bow, y_lem_train)
+
+
+    dec_tree_training_scores=pd.Series({
+        'CV_clean': cv_tree1.score(cv_clean_bow, y_clean_train),
+        'CV_stem': cv_tree2.score(cv_stem_bow, y_stem_train),
+        'CV_lem': cv_tree3.score(cv_lem_bow, y_lem_train),
+        'TFIDF_clean': tf_tree1.score(tf_clean_bow, y_clean_train),
+        'TFIDF_stem': tf_tree2.score(tf_stem_bow, y_stem_train),
+        'TFIDF_lem': tf_tree3.score(tf_lem_bow, y_lem_train)
+    })
+
+    return dec_tree_training_scores

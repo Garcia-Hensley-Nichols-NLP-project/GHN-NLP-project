@@ -34,6 +34,7 @@ from sklearn import metrics
 from sklearn.cluster import KMeans, DBSCAN
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_selection import SelectKBest, RFE, f_regression
+from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression, LinearRegression, LassoLars, TweedieRegressor
 from sklearn.model_selection import train_test_split
