@@ -145,6 +145,7 @@ def words(df):
     df['contains_python_keywords'] = df.clean.str.contains(r'(python)|(import)|(pip)|(pddataframe)|(python3)', regex = True).astype(int)
     df['contains_cpp_keywords'] = df.clean.str.contains(r'(windows)|(linux)|(blackbird)', regex = True).astype(int)
     df['contains_js_keywords'] = df.clean.str.contains(r'(js)|(docker)|(ccxt)|(npm)', regex = True).astype(int)
+    df['readme_size'] = df.clean.apply(len)
 
     return df
 
