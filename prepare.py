@@ -2,6 +2,49 @@
 
 from imports import *
 
+################################################################################
+
+python_keywords = [
+    'python',
+    'pip',
+    'pddataframe',
+    'python3',
+    'pandas',
+    'matplotlib',
+    'seaborn',
+    'bitcoinlib',
+    'cryptocompare',
+    'cryptofeed',
+    'freqtrade',
+    'ccxt',
+    'pytest'
+]
+
+cpp_keywords = [
+    'c\+\+',
+    'c',
+    'blackbird',
+    'gnu',
+    'g\+\+',
+    'make'
+]
+
+js_keywords = [
+    'js',
+    'docker',
+    'npm',
+    'javascript',
+    'node',
+    'react',
+    'nodejs',
+    'reactjs',
+    'node.js',
+    'react.js'
+    'ccxt'
+]
+
+################################################################################
+
 
 def basic_clean(original):
 	'''
@@ -142,9 +185,10 @@ def words(df):
     rows=(df.language!='Python')&(df.language!='C++')&(df.language!='JavaScript')
     df.loc[rows,'language']='other'
 
-    df['contains_python_keywords'] = df.clean.str.contains(r'(python)|(import)|(pip)|(pddataframe)|(python3)', regex = True).astype(int)
-    df['contains_cpp_keywords'] = df.clean.str.contains(r'(windows)|(linux)|(blackbird)', regex = True).astype(int)
-    df['contains_js_keywords'] = df.clean.str.contains(r'(js)|(docker)|(ccxt)|(npm)', regex = True).astype(int)
+    df['contains_python_keywords'] = df.clean.str.contains(''.join(fr'({keyword})|' for keyword in python_keywords).rstrip('|'), regex = True).astype(int)
+    df['contains_cpp_keywords'] = df.clean.str.contains(''.join(fr'({keyword})|' for keyword in cpp_keywords).rstrip('|'), regex = True).astype(int)
+    df['contains_js_keywords'] = df.clean.str.contains(''.join(fr'({keyword})|' for keyword in js_keywords).rstrip('|'), regex = True).astype(int)
+    df['readme_size'] = df.clean.apply(len)
 
     return df
 
