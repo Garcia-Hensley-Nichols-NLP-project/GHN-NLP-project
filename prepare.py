@@ -22,11 +22,9 @@ python_keywords = [
 
 cpp_keywords = [
     'c\+\+',
-    'c',
     'blackbird',
     'gnu',
-    'g\+\+',
-    'make'
+    'g\+\+'
 ]
 
 js_keywords = [
@@ -185,9 +183,9 @@ def words(df):
     rows=(df.language!='Python')&(df.language!='C++')&(df.language!='JavaScript')
     df.loc[rows,'language']='other'
 
-    df['contains_python_keywords'] = df.clean.str.contains(''.join(fr'({keyword})|' for keyword in python_keywords).rstrip('|'), regex = True).astype(int)
-    df['contains_cpp_keywords'] = df.clean.str.contains(''.join(fr'({keyword})|' for keyword in cpp_keywords).rstrip('|'), regex = True).astype(int)
-    df['contains_js_keywords'] = df.clean.str.contains(''.join(fr'({keyword})|' for keyword in js_keywords).rstrip('|'), regex = True).astype(int)
+    df['contains_python_keywords'] = df.clean.str.contains(''.join(fr'({keyword})|' for keyword in python_keywords).rstrip('|'), regex = True).astype(str)
+    df['contains_cpp_keywords'] = df.clean.str.contains(''.join(fr'({keyword})|' for keyword in cpp_keywords).rstrip('|'), regex = True).astype(str)
+    df['contains_js_keywords'] = df.clean.str.contains(''.join(fr'({keyword})|' for keyword in js_keywords).rstrip('|'), regex = True).astype(str)
     df['readme_size'] = df.clean.apply(len)
 
     return df
