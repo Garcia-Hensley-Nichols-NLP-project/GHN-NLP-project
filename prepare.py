@@ -52,7 +52,7 @@ def basic_clean(original):
 	'''
 	article=original.lower()
 	article = unicodedata.normalize('NFKD', article).encode('ascii', 'ignore').decode('utf-8', 'ignore')
-	article = re.sub(r"[^a-z\s]", '', article)
+	article = re.sub(r"[^a-z\s\+]", '', article)
 	return article
 
 def tokenize(article):
