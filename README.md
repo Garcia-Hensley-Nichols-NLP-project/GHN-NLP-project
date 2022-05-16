@@ -46,16 +46,15 @@ The programming language percentage is an infographic on the home page of every 
 
 Another common attribute of GitHub repo's is the `README.md`. The `README.md` is a file that generally contains an introduction to the repo, explains the purpose of the code, and shares instructions for running the code.
 
-In this project, we will attempt to use data from the `README.md` to predict what language that repo is primarilly coded in. We start by searching github.com for repo's related to the search term "bitcoin". This search is done via GitHub's API and a list is extracted that contains the url path to 100 related repos. We use the list to ascertain the contents of the `README.md` from each repo. The path and language of the repo are gathered additionally.
-
-Now begins the challenge of quantizing communications in the english lanuage. NLP attempts to do just that by utilizing cutting edge computational power. Common parsing techniques are used on the original corpus collected from GitHub. In this project, the contents of an individual `README.md` are treated as a document. Each document is changed to all lower case letters, has punctuation removed, is tokenized, and has stop-words removed as a function of basic cleaning. Further preprocessing includes stemming and lemmetization. Column names are changed for convenience and all languages other than the top 3 are consolidated into category 'other'. The tidied strings are returned in a single Pandas dataframe.
-
-We explore the dataframe using text classification and topic modeling. 
+In this project, we will attempt to use data from the `README.md` to predict what language that repo is primarilly coded in. We are specifically interested in repo's related to the search term "bitcoin". We use the top 500 results for the search term "bitcoin" to obtain the data used for this project.
 
 ### Initial Questions
 
 1. Can we predict the programming language of a repo by using NLP on the `README.md`?
-2. Is there a statistically significant difference between `README.md` lengths from the top 3 most common languages?
+2. Is there a statistically significant difference between `README.md` lengths for the top 3 most common languages?
+3. Can the presence of certain keywords be used to identify the main programming language for a repository?
+4. Are there bi-grams that are unique to one of the top 3 most common programming languages?
+5. Is there a statistically significant difference in sentiment analysis between `REAMDE.md` files for the top 3 most common languages?
 
 </details>
 
@@ -70,7 +69,13 @@ ___
 | --------------------- | ------------ |
 | repo | Path to repository on github.com |
 | language | Primary programming language in repository |
-| readme_contents | Contains full contents of the repostitories "README.md" |
+| readme | Contains full contents of the repository's "README.md" |
+| clean | Contains the normalized, and tokenized, contents of the repository's "README.md" with stopwords removed |
+| stemmed | Contains the stemmed words from the clean "README.md" text |
+| lemmatized | Contains the lemmatized words from the clean "README.md" text |
+| contains_python_keywords | Whether or not a README contains keywords common to Python repositories |
+| contains_cpp_keywords | Whether or not a README contains keywords common to C++ repositories |
+| contains_js_keywords | Whether or not a README contains keywords common to JavaScript repositories |
 
 </details>
 
@@ -89,13 +94,15 @@ Plan &#8594; Acquire &#8594; Prepare &#8594; Explore &#8594; Model &#8594; Deliv
 
 **Acquisition Files:**
 
-- test.ipynb, pulls list of repo's matching search term "binance"
-- acquire.py, pulls repo path, language, and readme from list of repo's in test.ipynb
+- acquire_urls.ipynb: Contains instructions for pulling a list of repository URLs matching the search term "bitcoin". It should be noted that this script was executed on May 16, 2022 and may produce different results at a later date. For reproducibility, a cache file containing the specific URLs used for this project is provided with the repository.
+- urls.csv: A cache file containing URLs for the repositories used for this project.
+- acquire.py: A python script containing code that pulls the repo path, language, and readme from list of repo's in urls.csv.
 
 **Steps Taken:**
 
-- The data is collected from several repo's on github.com via the sites API.
-- A list of repo's is generated from search results for "bitcoin".
+- This search is done via GitHub's API and a list is extracted that contains the url path to 500 related repos.
+- A list of URLs for repositories matching the search term "bitcoin" is collected using the Github API. In order to have ample data to work with N URLs are acquired.
+- The list of URLs is used to acquire the `README.md` file and primary programming language for each repository using the Github API. This can be a time consuming process.
 - The readme's from each repo are pulled through the API and compiled to return a .json file with the aforementioned keys and values.
 
 </details>
@@ -106,24 +113,24 @@ Plan &#8594; Acquire &#8594; Prepare &#8594; Explore &#8594; Model &#8594; Deliv
 
 **Preparation Files:**
 
-- prepare.ipynb, testing of prepare.py
-- prepare.py, prepares the readme's for exploration and modeling
+- prepare.ipynb: Contains instructions for preparing the data and testing the prepare.py module.
+- prepare.py: Contains functions used for preparing the readme's for exploration and modeling.
+- preprocessing.py: Contains functions used for preprocessing data for exploration and modeling such as splitting data.
 
 **Steps Taken:**
 
-All data is prepared for natural language processing by:
-
-- lowering the case of all words
-- removing punctuation
-- tokenization
-- removing stop words
-- column name changed
-- languages other than top 3 consolidated to 'other'
-
-Additional preparations include:
-
-- stemming
-- lemmatization
+- Now begins the challenge of quantizing communications in the english lanuage. NLP attempts to do just that by utilizing cutting edge computational power. Common parsing techniques are used on the original corpus collected from GitHub.
+- In this project, the contents of an individual `README.md` are treated as a document. Each document is changed to all lower case letters, has punctuation removed, is tokenized, and has stop-words removed as a function of basic cleaning. Below are all the steps in preparing the data:
+  - lowering the case of all words
+  - removing punctuation
+  - tokenization
+  - removing stop words
+  - column name changed
+  - languages other than top 3 consolidated to 'other'
+- The top 3 programming languages are Python, C++, and JavaScript which are each given their own classification class.
+- Further preprocessing includes stemming and lemmetization.
+- Column names are changed for convenience and all languages other than the top 3 are consolidated into the category 'other'.
+- The tidied strings are returned in a single Pandas dataframe.
 
 </details>
 
@@ -133,16 +140,18 @@ Additional preparations include:
 
 **Exploratory Analysis Files:**
 
-- explore.ipynb,
-- prepare.py
-- preprocessing.py
+- explore.ipynb: Contains all steps taken and decisions made in the exploration phase with key takeaways.
+- explore.py: Contains functions used for producing visualizations and conducting statistical tests in the final report notebook.
 
 **Steps Taken:**
 
-- explore readme's by language
-- analyze word frequency by language
-- bi-gram analysis
-- word cloud
+- First the data is split into three datasets: train, validate, and test. The training dataset is explored in the explore notebook and used later for training machine learning models. The validate and test datasets are used as unseen data to determine how the machine learning models perform on unseen data.
+- The overall word frequencies are explored for the clean, stemmed, and lemmatized text to determine if there is any difference in word frequencies for each prepared README data.
+- The word frequencies for each target class (Python, C++, JavaScript, and Other) are explored to determine if there are common words unique to each programming language.
+- Bi-gram and Tri-gram analysis is conducted to determine if there are unique bi-grams or tri-grams for any of the target classes.
+- Word clouds are produced for presentation purposes.
+- The length of the README files is compared for each target class to determine if READMEs on average vary in size for different primary programming languages.
+- Sentiment analysis is conducted for all target classes to determine if there is any significant difference in sentiment for each programming lanugage.
 
 </details>
 
@@ -152,9 +161,9 @@ Additional preparations include:
 
 **Modeling Files:**
 
-- model.ipynb
-- Nichols_work.ipynb
-- model.py
+- model.ipynb: Contains all steps taken and decisions made in the modeling phase with key takeaways.
+- Nichols_work.ipynb: 
+- model.py: 
 
 **Steps Taken:**
 
