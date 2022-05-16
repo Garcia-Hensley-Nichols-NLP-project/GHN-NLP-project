@@ -14,6 +14,7 @@ import os
 import json
 from typing import Dict, List, Optional, Union, cast
 import requests
+import pandas as pd
 
 from env import github_token, github_username
 
@@ -24,108 +25,7 @@ from env import github_token, github_username
 # TODO: Add your github username to your env.py file under the variable `github_username`
 # TODO: Add more repositories to the `REPOS` list below.
 
-REPOS = [
-    "bitcoin/bitcoin",
-    "bitcoinbook/bitcoinbook",
-    "bitcoin/bips",
-    "bitcoinjs/bitcoinjs-lib",
-    "spesmilo/electrum",
-    "bitcoin-wallet/bitcoin-wallet",
-    "etotheipi/BitcoinArmory",
-    "bitcoin-dot-org/Bitcoin.org",
-    "jgarzik/cpuminer",
-    "BitcoinExchangeFH/BitcoinExchangeFH",
-    "yenom/BitcoinKit",
-    "maxme/bitcoin-arbitrage",
-    "BitcoinUnlimited/BitcoinUnlimited",
-    "Bitcoin-ABC/bitcoin-abc",
-    "bisq-network/bisq",
-    "mobnetic/BitcoinChecker",
-    "bitcoin-abe/bitcoin-abe",
-    "petertodd/python-bitcoinlib",
-    "sipa/bitcoin-seeder",
-    "imfly/bitcoin-on-nodejs",
-    "PiSimo/BitcoinForecast",
-    "trottier/original-bitcoin",
-    "rust-bitcoin/rust-bitcoin",
-    "Bit-Wasp/bitcoin-php",
-    "btcpayserver/btcpayserver",
-    "bitcoin-core/bitcoincore.org",
-    "lian/bitcoin-ruby",
-    "GammaGao/bitcoinwhitepaper",
-    "tianmingyun/MasterBitcoin2CN",
-    "kylemanna/docker-bitcoind",
-    "pointbiz/bitaddress.org",
-    "BTCPrivate/BitcoinPrivate-legacy",
-    "jgarzik/python-bitcoinrpc",
-    "pooler/cpuminer",
-    "progranism/Open-Source-FPGA-Bitcoin-Miner",
-    "HelloZeroNet/ZeroNet",
-    "cryptean/bitcoinlib",
-    "xiaolai/bitcoin-whitepaper-chinese-translation",
-    "oleganza/CoreBitcoin",
-    "bitcoin-sv/bitcoin-sv",
-    "m0mchil/poclbm",
-    "jgarzik/pyminer",
-    "bitcoinxt/bitcoinxt",
-    "paritytech/parity-bitcoin",
-    "bitpay/insight",
-    "stratisproject/StratisBitcoinFullNode",
-    "Multibit-Legacy/multibit",
-    "janoside/btc-rpc-explorer",
-    "BlockchainCommons/Learning-Bitcoin-from-the-Command-Line",
-    "JulyIghor/QtBitcoinTrader",
-    "MetacoSA/NBitcoin",
-    "p2pool/p2pool",
-    "bitcoincashorg/bitcoincash.org",
-    "igorbarinov/awesome-bitcoin",
-    "buttercoin/buttercoin",
-    "1200wd/bitcoinlib",
-    "BitcoinPHP/BitcoinECDSA.php",
-    "bitpay/bitcore",
-    "lefnire/tforce_btc_trader",
-    "bitpay/insight-api",
-    "bitpay/bitcore-lib",
-    "100trillionUSD/bitcoin",
-    "jashmenn/bitcoin-reading-list",
-    "bitpay/bitcoind-rpc",
-    "zquestz/bitcoincash",
-    "davout/bitcoin-central",
-    "btcsuite/btcd",
-    "ofek/bit",
-    "bitpay/bitcore-wallet-service",
-    "breadwallet/breadwallet-core",
-    "ruimarinho/bitcoin-core",
-    "dooglus/intersango",
-    "Diablo-D3/DiabloMiner",
-    "freewil/bitcoin-testnet-box",
-    "mycelium-com/wallet-android",
-    "benjyz/bitcoinArchive",
-    "Blockstream/esplora",
-    "butor/blackbird",
-    "Bitlits/Bitcoin-Games",
-    "znort987/blockparser",
-    "kingrock/BitcoinExchange",
-    "aceat64/EasyBitcoin-PHP",
-    "eveybcd/BitcoinDiamond",
-    "siminchen/bitcoinIDE",
-    "BitcoinMafia/SpareCoinsExt",
-    "thallium205/BitcoinVisualizer",
-    "brandonrobertz/BitcoinTradingAlgorithmToolkit",
-    "libbitcoin/libbitcoin-explorer",
-    "phishman3579/Bitcoin",
-    "LedgerHQ/app-bitcoin",
-    "SegwitB2X/bitcoin2x",
-    "llSourcell/bitcoin_prediction",
-    "alecalve/python-bitcoin-blockchain-parser",
-    "fkysly/bitcoin0.1.0",
-    "haskoin/haskoin-core",
-    "philipperemy/deep-learning-bitcoin",
-    "libbitcoin/libbitcoin-system",
-    "ruimarinho/docker-bitcoin-core",
-    "blinktrade/bitex",
-    "bitcoin-core/HWI"
-]
+REPOS = pd.read_csv('urls.csv')
 
 headers = {"Authorization": f"token {github_token}", "User-Agent": github_username}
 
@@ -205,7 +105,7 @@ def scrape_github_data() -> List[Dict[str, str]]:
     """
     Loop through all of the repos and process them. Returns the processed data.
     """
-    return [process_repo(repo) for repo in REPOS]
+    return [process_repo(repo) for repo in REPOS['URL']]
 
 
 if __name__ == "__main__":
