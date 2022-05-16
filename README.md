@@ -89,7 +89,7 @@ Plan &#8594; Acquire &#8594; Prepare &#8594; Explore &#8594; Model &#8594; Deliv
 
 **Acquisition Files:**
 
-- test.ipynb, pulls list of repo's matching search term "binance:
+- test.ipynb, pulls list of repo's matching search term "binance"
 - acquire.py, pulls repo path, language, and readme from list of repo's in test.ipynb
 
 **Steps Taken:**
@@ -152,6 +152,7 @@ Additional preparations include:
 
 **Modeling Files:**
 
+- model.ipynb
 - Nichols_work.ipynb
 - model.py
 

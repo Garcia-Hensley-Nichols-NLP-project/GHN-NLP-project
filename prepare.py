@@ -147,3 +147,47 @@ def words(df):
     df['contains_js_keywords'] = df.clean.str.contains(r'(js)|(docker)|(ccxt)|(npm)', regex = True).astype(int)
 
     return df
+
+def model_prep(df):
+	# Make copies of df with prepared columns and target
+	clean_df = df.copy()[['language', 'clean']]
+	stem_df = df.copy()[['language', 'stemmed']]
+	lem_df = df.copy()[['language', 'lemmatized']]
+
+	# Get splits for each of the above dfs and isolate target
+	X_clean = clean_df[['clean']]
+	y_clean = clean_df.language
+
+	X_clean_train, X_clean_test, y_clean_train, y_clean_test = train_test_split(X_clean, y_clean, test_size=.2, random_state=302)
+	X_clean_train, X_clean_validate, y_clean_train, y_clean_validate  = train_test_split(X_clean_train, y_clean_train, test_size=.3, random_state=302)
+
+	X_stem = stem_df[['stemmed']]
+	y_stem = stem_df.language
+
+	X_stem_train, X_stem_test, y_stem_train, y_stem_test = train_test_split(X_stem, y_stem, test_size=.2, random_state=302)
+	X_stem_train, X_stem_validate, y_stem_train, y_stem_validate  = train_test_split(X_stem_train, y_stem_train, test_size=.3, random_state=302)
+
+	X_lem = lem_df[['lemmatized']]
+	y_lem = lem_df.language
+
+	X_lem_train, X_lem_test, y_lem_train, y_lem_test = train_test_split(X_lem, y_lem, test_size=.2, random_state=302)
+	X_lem_train, X_lem_validate, y_lem_train, y_lem_validate  = train_test_split(X_lem_train, y_lem_train, test_size=.3, random_state=302)
+
+	return (X_lem_train,
+	X_lem_validate,
+	X_lem_test,
+	y_lem_train,
+	y_lem_validate,
+	y_lem_test,
+	X_stem_train,
+	X_stem_validate,
+	X_stem_test,
+	y_stem_train,
+	y_stem_validate,
+	y_stem_test,
+	X_clean_train,
+	X_clean_validate,
+	X_clean_test,
+	y_clean_train,
+	y_clean_validate,
+	y_clean_test)
