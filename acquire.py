@@ -105,7 +105,13 @@ def scrape_github_data() -> List[Dict[str, str]]:
     """
     Loop through all of the repos and process them. Returns the processed data.
     """
-    return [process_repo(repo) for repo in REPOS['URL']]
+    data = []
+
+    for index, repo in enumerate(REPOS['URL']):
+        print(f'Reading repo number {index} from REPOS.', end = '\r')
+        data.append(process_repo(repo))
+
+    return data
 
 
 if __name__ == "__main__":
