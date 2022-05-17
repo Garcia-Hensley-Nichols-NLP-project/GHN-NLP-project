@@ -1,12 +1,15 @@
-# NLP Project
+# Predicting the Primary Programming Language for a GitHub Repository
 
 This repository contains all files, and ipython notebooks, used in the NLP Project. A full outline of all the files with descriptions can be found below.
+
+To view the slide deck, ["click here."](https://docs.google.com/presentation/d/1I_QQLWC0TRMOb0x_x64Gjn7MMuG_94kd-X5K00pr4kY/edit?usp=sharing) 
+
 
 ___
 
 ## Table of Contents
 
-- [NLP Project](#nlp-project)
+- [Predicting the Primary Programming Language for a GitHub Repository](#predicting-the-primary-programming-language-for-a-github-repository)
   - [Table of Contents](#table-of-contents)
   - [Project Summary](#project-summary)
   - [Project Planning](#project-planning)
@@ -20,6 +23,8 @@ ___
     - [Exploratory Analysis](#exploratory-analysis)
     - [Modeling](#modeling)
   - [Conclusion](#conclusion)
+  - [Key Takeaways and Recommendations:](#key-takeaways-and-recommendations)
+  - [Lesson's Learned](#lessons-learned)
   - [Instructions For Recreating This Project](#instructions-for-recreating-this-project)
 
 ___
@@ -180,23 +185,22 @@ Plan &#8594; Acquire &#8594; Prepare &#8594; Explore &#8594; Model &#8594; Deliv
 ___
 
 ## Conclusion
+## Key Takeaways and Recommendations:
+## Lesson's Learned
 
 <details><summary><i>Click to expand</i></summary>
 
+We feel confident that the natural language of a GitHub `README.md` can be used to predict the programming language of that repository. While our top model did perform better than the baseline prediction of `'other'`, the performance of the models in this report would not be recommended for production. Here are some of the key takeaways we garnered during our data science pipeline.
 
+While acquiring data, early tests were ran with 100 repo's. The low number of documents wasn't enough to adequately train the model. In later versions we used 500 repo's. For higher quality results, we recommend collecting as many repo's as possible from the results of the search query.
 
-Takeaways:
+Data preparation included the full gambit of natural language preprocessing. We would recommend the same procedure as above.
 
-Statistically significant differences in the average lengths of Javascript repo READMEs compared to the length of READMEs written for repos representing other programming languages. A classification model that can take this into account may see a boost in accuracy.
+Our exploration of the corpora exposed what we might have suspected; the various programing languages have a unique dialect which can be used to identify them. Consequently, when the `README.md` had very few words, was not properly written, or had encoded information, our model had a harder time classifying the repo. In future iterations, we would recommend setting a minimum word count per document. Document length was also shown to significantly indicate when a document belongs to the "JavaScript" or "C++" class. Future models may take advantage of these findings. Lastly we saw that some bigrams where characteristic of the separate languages.
 
-The TF/IDF vectorizer, combined with any of our three text preparations, flatly outperforms the count vectorizer in terms of accuracy.
+Our first pass at modeling was promising. Our best decision tree had an accuracy of 72% on validate and 65% on test, which beat the baseline accuracy of 56%. That model used a TD-IDF vectorizer on the `'clean'` corpus. We believe using other classification models, such as random forest or naive bayes, in conjunction with optimized parameters like max depth or larger n-grams will yeild reliable, production ready results.
 
-
-
-Recomendation:
-readme can be used to predict language ... assuming that the author wrote the readme
-perhaps eliminate readme's that are too short
-
+In this project, we have shown that the programming language of a GitHub repo can be correctly classified by the contents of the `README.md`. If time allowed and the following considerations were implemented in code, we suspect the result would be higher in accuracy and more consistent on unseen data.
 
 </details>
 
