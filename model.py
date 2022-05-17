@@ -181,7 +181,7 @@ def get_bigram_vectorizer_random_forests(text_data, target, n_estimators, max_de
 
 def get_dt_valtest_score(bow, train_data, valtest_data, target, model):
     '''
-    Takes in a previously fit_transformed vectorizer(bag of words[bow]), text data that is NOT from the train split, a matching target, and a previously 
+    Takes in a previously fit_transformed vectorizer(bag of words[bow]), train data,  validate or test data, a matching target, and a previously 
     fitted model,
     and returns an accuracy score for the model against the unseen text data.
     '''
