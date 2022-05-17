@@ -45,13 +45,14 @@ js_keywords = [
 
 
 def basic_clean(original):
-	'''
-	takes an original string and outputs a tidy "article"
-	'''
-	article=original.lower()
-	article = unicodedata.normalize('NFKD', article).encode('ascii', 'ignore').decode('utf-8', 'ignore')
-	article = re.sub(r"[^a-z\s\+]", '', article)
-	return article
+    '''
+    takes an original string and outputs a tidy "article"
+    '''
+    article=original.lower()
+    article = unicodedata.normalize('NFKD', article).encode('ascii', 'ignore').decode('utf-8', 'ignore')
+    article = re.sub(r"[^a-z\s\+]", '', article)
+    article = article.replace('&#9;', '')
+    return article
 
 def tokenize(article):
 	'''

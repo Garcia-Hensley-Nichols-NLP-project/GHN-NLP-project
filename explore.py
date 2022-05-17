@@ -11,7 +11,10 @@
 
     Functions:
 
+        plot_target_distribution(df)
         plot_most_frequent_words(df)
+        plot_contains_keywords(df)
+        plot_bigrams(df)
         plot_readme_size_vs_language(df, group_column = 'language')
         one_sample_ttest(df, sample, column, alternative = 'two-sided')
 
@@ -24,7 +27,29 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
 
+import nltk
+
 from wordcloud import WordCloud
+
+################################################################################
+
+def plot_target_distribution(df: pd.DataFrame) -> None:
+    '''
+        Create a plot of the distribution of the target variable "language".
+    
+        Parameters
+        ----------
+        df: DataFrame
+            A pandas dataframe containing the readme data.
+    '''
+
+    plt.figure(figsize = (14, 4))
+    sns.histplot(data = df, x = 'language')
+
+    plt.title('The main programming language for most repositories is not in the top 3 (Python, C++, JavaScript)')
+    plt.xlabel('Programming Language')
+    
+    plt.show()
 
 ################################################################################
 
@@ -108,6 +133,47 @@ def plot_contains_keywords(df: pd.DataFrame) -> None:
     sns.histplot(data = df[df.language == 'JavaScript'], x = 'contains_js_keywords', ax = ax[2])
     ax[2].set_title('JavaScript Repositories')
     ax[2].set_xlabel('Contains JavaScript Keywords')
+
+    plt.show()
+
+################################################################################
+
+def plot_bigrams(df: pd.DataFrame) -> None:
+    '''
+        Create plots displaying the most common bi-grams for each programming 
+        language.
+    
+        Parameters
+        ----------
+        df: DataFrame
+            A pandas dataframe containing the readme data.
+    '''
+
+    fig, ax = plt.subplots(ncols = 1, nrows = 3, figsize = (14, 8))
+
+    python_clean_words = ' '.join(readme for readme in df[df.language == 'Python'].clean)
+    cpp_clean_words = ' '.join(readme for readme in df[df.language == 'C++'].clean)
+    javascript_clean_words = ' '.join(readme for readme in df[df.language == 'JavaScript'].clean).replace('&#9;', '')
+
+    python_bigrams = pd.Series(nltk.bigrams(python_clean_words.split()))
+    python_bigrams.value_counts().head(5).plot.barh(ax = ax[0])
+    ax[0].set_title('Most common bi-grams for Python repositories')
+    ax[0].set_xlabel('Count')
+    ax[0].set_ylabel('Bi-Gram')
+
+    cpp_bigrams = pd.Series(nltk.bigrams(cpp_clean_words.split()))
+    cpp_bigrams.value_counts().head(5).plot.barh(ax = ax[1])
+    ax[1].set_title('Most common bi-grams for C++ repositories')
+    ax[1].set_xlabel('Count')
+    ax[1].set_ylabel('Bi-Gram')
+
+    javascript_bigrams = pd.Series(nltk.bigrams(javascript_clean_words.split()))
+    javascript_bigrams.value_counts().head(5).plot.barh(ax = ax[2])
+    ax[2].set_title('Most common bi-grams for JavaScript repositories')
+    ax[2].set_xlabel('Count')
+    ax[2].set_ylabel('Bi-Gram')
+
+    plt.tight_layout()
 
     plt.show()
 
