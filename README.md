@@ -202,6 +202,11 @@ Our first pass at modeling was promising. Our best decision tree had an accuracy
 
 In this project, we have shown that the programming language of a GitHub repo can be correctly classified by the contents of the `README.md`. If time allowed and the following considerations were implemented in code, we suspect the result would be higher in accuracy and more consistent on unseen data.
 
+**Next Steps:**
+Other types of models, including Naive Bayes, which we attempted but found too computationally costly to work on our dataset, could and should be evaluated. In the case of Naive Bayes, we will need to use a decidedly smaller and more selectively targeted set of features. We did attempt to use a Naive Bayes model using some of the features we engineered, but the results were not as promising as the decision tree performance. As a next step we would like to take the time to engineer additional features that may prove helpful.
+
+We noticed that many READMEs were not helpful for our purposes. For instance, some READMEs were very brief without any information about the tools used. Others were in foreign languages. Still others had encoded information which gets parsed out by the preparation script. As a next step we would like to separate problematic READMEs such as those mentioned from those that do provide useful information. We would like to determine how our models could perform with information rich READMEs vs. those that are scarce with information.
+
 </details>
 
 ___
