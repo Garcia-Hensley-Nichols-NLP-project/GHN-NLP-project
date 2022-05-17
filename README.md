@@ -22,16 +22,14 @@ ___
     - [Data Preparation](#data-preparation)
     - [Exploratory Analysis](#exploratory-analysis)
     - [Modeling](#modeling)
-  - [Conclusion](#conclusion)
-  - [Key Takeaways and Recommendations:](#key-takeaways-and-recommendations)
-  - [Lesson's Learned](#lessons-learned)
+  - [Lessons Learned](#lessons-learned)
   - [Instructions For Recreating This Project](#instructions-for-recreating-this-project)
 
 ___
 
 ## Project Summary
 
-Data from the `README.md` files of 100 GitHub repositories (repo's) are analyzed in order to attempt prediction of their primary programming language.
+Data from the `README.md` files of 500 GitHub repositories (repo's) are analyzed in order to attempt prediction of their primary programming language.
 
 ___
 
@@ -184,9 +182,7 @@ Plan &#8594; Acquire &#8594; Prepare &#8594; Explore &#8594; Model &#8594; Deliv
 
 ___
 
-## Conclusion
-## Key Takeaways and Recommendations:
-## Lesson's Learned
+## Lessons Learned
 
 <details><summary><i>Click to expand</i></summary>
 
