@@ -179,7 +179,7 @@ def get_bigram_vectorizer_random_forests(text_data, target, n_estimators, max_de
 
 
 
-def get_dt_valtest_score(bow, text_data, target, model):
+def get_dt_valtest_score(bow, train_data, valtest_data, target, model):
     '''
     Takes in a previously fit_transformed vectorizer(bag of words[bow]), text data that is NOT from the train split, a matching target, and a previously 
     fitted model,
@@ -188,8 +188,9 @@ def get_dt_valtest_score(bow, text_data, target, model):
     
     # Vectorizer object
     bow = TfidfVectorizer()
+    bow.fit_transform(train_data)
     # Transform bow on text_data
-    bow = bow.transform(text_data)
+    bow = bow.transform(valtest_data)
     # Evaluate model accuracy
     model_score = model.score(bow, target)
 
