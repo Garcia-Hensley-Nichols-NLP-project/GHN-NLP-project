@@ -185,7 +185,9 @@ def get_dt_valtest_score(bow, text_data, target, model):
     fitted model,
     and returns an accuracy score for the model against the unseen text data.
     '''
-
+    
+    # Vectorizer object
+    bow = TfidfVectorizer()
     # Transform bow on text_data
     bow = bow.transform(text_data)
     # Evaluate model accuracy
