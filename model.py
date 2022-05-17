@@ -1,6 +1,6 @@
 from os import terminal_size
 import pandas as pd
-from prepare import basic_stem, tokenize, stem, lemmatize, remove_stopwords, prep_article_data, words
+#from prepare import basic_stem, tokenize, stem, lemmatize, remove_stopwords, prep_article_data, words
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 from sklearn.model_selection import train_test_split
 
