@@ -162,17 +162,18 @@ Plan &#8594; Acquire &#8594; Prepare &#8594; Explore &#8594; Model &#8594; Deliv
 **Modeling Files:**
 
 - model.ipynb: Contains all steps taken and decisions made in the modeling phase with key takeaways.
-- Nichols_work.ipynb: 
-- model.py: 
+- Nichols_work.ipynb: Entire corpus of code for modeling the repo's `README.md`.
+- model.py: Modeling procedures functionized for final report.
 
 **Steps Taken:**
 
-The following modelling techniques are implemented:
-
-- Term Frequency (TF)
-- Inverse Document Frequency (IDF)
-- TF-IDF w/ SKLearn
-- Classification Machine Learning Model
+- First we take the prepared data from above and isolate the target from the features. Both, feature and target, are further divided into train, test, and validate dataframes.
+- To better help our models read English we will tokenize each word in the document.
+- Tokenized documents are then processed to remove any confusion about word meaning. There are two methods used to extract the root / stem word, they are stemming and lemmatization.
+- Finally, stop words (such as "to", "and", "a", etc...) are removed.
+- This particular corpus lends itself perfectly to a classification model. Therefore, we will use a decision tree to predict which programming language each README.md is referencing.
+- In this project we use a decision tree with a max depth of 5.
+- Each corpus was engineered for easier processing by the model. The features were engineered using a count vectorizer (CV) and a TF-IDF vectorizer (TF-IDF).
 
 </details>
 
@@ -182,6 +183,19 @@ ___
 
 <details><summary><i>Click to expand</i></summary>
 
+
+
+Takeaways:
+
+Statistically significant differences in the average lengths of Javascript repo READMEs compared to the length of READMEs written for repos representing other programming languages. A classification model that can take this into account may see a boost in accuracy.
+
+The TF/IDF vectorizer, combined with any of our three text preparations, flatly outperforms the count vectorizer in terms of accuracy.
+
+
+
+Recomendation:
+readme can be used to predict language ... assuming that the author wrote the readme
+perhaps eliminate readme's that are too short
 
 
 </details>
