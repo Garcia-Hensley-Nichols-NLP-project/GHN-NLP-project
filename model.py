@@ -107,7 +107,7 @@ def get_vectorizer_random_forests(text_data, target, n_estimators, max_depth):
 
     #Make and fit decision rf object for tfidf
     tfidf_rf = RandomForestClassifier(n_estimators=n_estimators, max_depth=max_depth)
-    tfidf_rf1.fit(tfidf_bow, target)
+    tfidf_rf.fit(tfidf_bow, target)
 
     # Get rf scores
     cv_rf_score = cv_rf.score(cv_bow, target)
@@ -127,7 +127,7 @@ def get_bigram_vectorizer_dec_trees(text_data, target, max_depth):
     cv = CountVectorizer(ngram_range(2,2)) 
     tfidf = TfidfVectorizer(ngram_range(2,2))
     
-    # Make bags of word (bow)
+    # Make bags of words (bow)
     cv_bow = cv.fit_transform(text_data)
     tfidf_bow = tfidf.fit_transform(text_data)
 
@@ -138,7 +138,7 @@ def get_bigram_vectorizer_dec_trees(text_data, target, max_depth):
 
     #Make and fit decision tree object for tfidf
     tfidf_tree = DecisionTreeClassifier(max_depth=max_depth)
-    tfidf_tree1.fit(tfidf_bow, target)
+    tfidf_tree.fit(tfidf_bow, target)
 
     # Get tree scores
     cv_tree_score = cv_tree.score(cv_bow, target)
@@ -158,7 +158,7 @@ def get_bigram_vectorizer_random_forests(text_data, target, n_estimators, max_de
     cv = CountVectorizer(ngram_range=(2,2))
     tfidf = TfidfVectorizer(ngram_range=(2,2))
     
-    # Make bags of word (bow)
+    # Make bags of words (bow)
     cv_bow = cv.fit_transform(text_data)
     tfidf_bow = tfidf.fit_transform(text_data)
 
