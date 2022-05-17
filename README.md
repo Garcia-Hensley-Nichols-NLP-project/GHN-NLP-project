@@ -198,7 +198,7 @@ Data preparation included the full gambit of natural language preprocessing. We 
 
 Our exploration of the corpora exposed what we might have suspected; the various programing languages have a unique dialect which can be used to identify them. Consequently, when the `README.md` had very few words, was not properly written, or had encoded information, our model had a harder time classifying the repo. In future iterations, we would recommend setting a minimum word count per document. Document length was also shown to significantly indicate when a document belongs to the "JavaScript" or "C++" class. Future models may take advantage of these findings. Lastly we saw that some bigrams where characteristic of the separate languages.
 
-Our first pass at modeling was promising. Our best decision tree had an accuracy of 72% on validate and 65% on test, which beat the baseline accuracy of 56%. That model used a TD-IDF vectorizer on the `'clean'` corpus. We believe using other classification models, such as random forest or naive bayes, in conjunction with optimized parameters like max depth or larger n-grams will yeild reliable, production ready results.
+Our first pass at modeling was promising. Our best decision tree had an accuracy of 72% on validate and 65% on test, which beat the baseline accuracy of 56%. That model used a TF-IDF vectorizer on the `'clean'` corpus. We believe using other classification models, such as random forest or naive bayes, in conjunction with optimized parameters like max depth or larger n-grams will yield reliable, production ready results.
 
 In this project, we have shown that the programming language of a GitHub repo can be correctly classified by the contents of the `README.md`. If time allowed and the following considerations were implemented in code, we suspect the result would be higher in accuracy and more consistent on unseen data.
 
@@ -211,7 +211,9 @@ ___
 <details><summary><i>Click to expand</i></summary>
 
 1. Clone this repository into your local machine using the following command:
+```bash
 git clone git@github.com:Garcia-Hensley-Nichols-NLP-project/GHN-NLP-project.git
+```
 2. You will need Natural Language Tool Kit (NLKT), Pandas, Numpy, Matplotlib, Seaborn, and SKLearn installed on your machine.
 3. Please run `python acquire.py` in a terminal to acquire the `data.json` file.
 4. Now you can start a Jupyter Notebook session and execute the code blocks in the `final_report.ipynb` notebook.
