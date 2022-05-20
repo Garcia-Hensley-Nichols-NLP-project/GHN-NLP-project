@@ -29,7 +29,7 @@ ___
 
 ## Project Summary
 
-Data from the `README.md` files of 500 GitHub repositories (repo's) are analyzed in order to attempt prediction of their primary programming language.
+Analyzed the `README.md` files of 500 GitHub repositories matching the search term "bitcoin" to determine if the primary programming language used in the repository could be determined from the information in the README. Our team discovered that many READMEs do provide enough information to make this prediction by identifying keywords unique to each programming language. We produced a model that out-performed the baseline by ten percentage points, however, because many READMEs contain either too little information, encoded information, or foreign languages a production ready model could not be recommended.
 
 ___
 
@@ -221,4 +221,4 @@ git clone git@github.com:Garcia-Hensley-Nichols-NLP-project/GHN-NLP-project.git
 
 </details>
 
-[Back to top]()
+[Back to top](#predicting-the-primary-programming-language-for-a-github-repository)
